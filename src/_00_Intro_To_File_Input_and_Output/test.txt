@@ -1,6 +1,2 @@
-This is a test file.
-It contains multiple lines of text.
-File IO in Java is fun!
-Working with files is useful and easy.
 
-this text writer thing is pretty cool
+Hello there. general kenobi, you are a bold one. *lightsabers ignite*  
