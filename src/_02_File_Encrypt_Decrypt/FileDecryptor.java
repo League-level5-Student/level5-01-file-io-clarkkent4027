@@ -29,25 +29,25 @@ public class FileDecryptor {
 	 */
 
 	public static void main(String[] args) {
-String str;
+		StringBuilder build = new StringBuilder();
 		try {
 			FileReader fr = new FileReader("src/_00_Intro_To_File_Input_and_Output/test.txt");
 			int c = fr.read();
 			while (c != -1) {
-				System.out.print((char) c);
-				if (c > 31 && c < 48) {
-
-				} else if (c + 4 > 122) {
-					c -= 22;
+				if (c > 32 && c < 52) {
+					build.append((char)c);
+				} else if (c - 4 < 97 && c-4>90) {
+					c += 22;
+					build.append((char)c);
 				} else {
-					c += 4;
-					c = fr.read();
+					c -= 4;
+					build.append((char)c);
 				}
-				
-				JOptionPane.showMessageDialog(null, str);
-				fr.close();
 
+				c = fr.read();
 			}
+			JOptionPane.showMessageDialog(null, build.toString());
+			fr.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
