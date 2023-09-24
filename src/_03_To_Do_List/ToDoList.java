@@ -2,6 +2,7 @@ package _03_To_Do_List;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -50,6 +51,23 @@ public class ToDoList implements ActionListener {
 	}
 
 	public void setUp() {
+		try {
+			BufferedReader b = new BufferedReader(new FileReader("src/_03_To_Do_List/toDoList"));
+			String line = b.readLine();
+			while (line != null) {
+				System.out.println(line);
+				line = b.readLine();
+			}
+
+			b.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		panel.setSize(50, 100);
 		frame.setSize(100, 100);
 		frame.setVisible(true);
@@ -92,12 +110,17 @@ public class ToDoList implements ActionListener {
 		}
 		if (e.getSource() == b4) {
 			try {
-				FileWriter write = new FileWriter("src/_00_Intro_To_File_Input_and_Output/test.txt");
+				String name = JOptionPane.showInputDialog(null, "Please enter the location of the file:");
+				FileWriter write = new FileWriter("src/_03_To_Do_List/" + name + ".txt");
+				FileWriter write2 = new FileWriter("src/_03_To_Do_List/toDoList.txt");
 				for (int i = 0; i < tasks.size(); i++) {
-					write.write(tasks.get(i)+"\n");
+					write.write(tasks.get(i) + "\n");
+					write2.write(tasks.get(i) + "\n");
 				}
+
 				System.out.println("List Saved!");
 				write.close();
+				write2.close();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -105,21 +128,21 @@ public class ToDoList implements ActionListener {
 
 		}
 		if (e.getSource() == b5) {
-String name =JOptionPane.showInputDialog(null, "Please enter the location of the file:");
-String file = "src/_00_Intro_To_File_Input_and_Output/"+name+".txt";
-try {
-	FileReader f = new FileReader(file);
-	int c = f.read();
-	while (c != -1) {
-		System.out.println((char)c);
-	}
-	f.close();
-} catch (FileNotFoundException e1) {
-	e1.printStackTrace();
-} catch (IOException e1) {
-	e1.printStackTrace();
-}
-}
-		
+			String name = JOptionPane.showInputDialog("Please enter the location of the file:");
+			try {
+				BufferedReader br = new BufferedReader(new FileReader("src/_03_To_Do_List/" + name + ".txt"));
+				String l = br.readLine();
+				while (l != null) {
+					System.out.println(l);
+					l = br.readLine();
+				}
+				br.close();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+
 	}
 }
