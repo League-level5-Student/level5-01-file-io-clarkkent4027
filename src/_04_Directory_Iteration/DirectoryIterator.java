@@ -13,13 +13,6 @@ public class DirectoryIterator {
 		 * Once the program is running, the directory is chosen using the JFileChooser.
 		 */
 		/*
-		 * JFileChooser jfc = new JFileChooser();
-		 * jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); int returnVal =
-		 * jfc.showOpenDialog(null); if (returnVal == JFileChooser.APPROVE_OPTION) {
-		 * File directory = jfc.getSelectedFile(); File[] files = directory.listFiles();
-		 * if(files != null) { for(File f : files) {
-		 * System.out.println(f.getAbsolutePath()); } } }
-		 * 
 		 * /* Your task is to write a program that iterates through the src folder of
 		 * this current Java Project. For every .java file it finds, the program will
 		 * add a (non-legally binding) copyright statement at the bottom. Be aware of
@@ -27,29 +20,29 @@ public class DirectoryIterator {
 		 * LastName)
 		 */
 		JFileChooser myFirstFileChooser = new JFileChooser("/Users/league/git/level5-01-file-io-clarkkent4027/src");
-		myFirstFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		int returnVa = myFirstFileChooser.showOpenDialog(null);
-		if (returnVa == JFileChooser.APPROVE_OPTION) {
-			File direct = myFirstFileChooser.getSelectedFile();
-			File[] file = direct.listFiles();
-			if (file != null) {
-				for (File f : file) {
-					try {
-						if (f.getName().contains(".java")) {
-							FileWriter fw = new FileWriter("src/_.txt");
-							fw.write("\n//Copyright © 2024 Devin Moorjani");
+		myFirstFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		File direct = myFirstFileChooser.getCurrentDirectory();
+		File[] file = direct.listFiles();
+		if (file != null) {
+			for (File f : file) {
+				String[] Files = f.list();
+				for (String j : Files) {
+					if (j.endsWith(".java")) {
+						try {
+							System.out.println("yes");
+							FileWriter fw = new FileWriter("src/" + f.getName() + "/" + j, true);
+							fw.write("\n//Copyright © 2023 Devin Danger Moorjani");
 							fw.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					System.out.println(f.getAbsolutePath());
 				}
 			}
 
+			}
 		}
-	}
 
+	}
 }
+
