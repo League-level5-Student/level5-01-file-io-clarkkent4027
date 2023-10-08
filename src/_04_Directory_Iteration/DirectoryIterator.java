@@ -19,30 +19,37 @@ public class DirectoryIterator {
 		 * possible directories inside of directories. (e.g //Copyright © 2019 FirstName
 		 * LastName)
 		 */
-		JFileChooser myFirstFileChooser = new JFileChooser("/Users/league/git/level5-01-file-io-clarkkent4027/src");
-		myFirstFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		File direct = myFirstFileChooser.getCurrentDirectory();
-		File[] file = direct.listFiles();
-		if (file != null) {
-			for (File f : file) {
-				String[] Files = f.list();
-				for (String j : Files) {
-					if (j.endsWith(".java")) {
-						try {
-							System.out.println("yes");
-							FileWriter fw = new FileWriter("src/" + f.getName() + "/" + j, true);
-							fw.write("\n//Copyright © 2023 Devin Danger Moorjani");
-							fw.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				}
-			}
 
+		JFileChooser myFirstFileChooser = new JFileChooser();
+		int value = myFirstFileChooser.showOpenDialog(null);
+		if (value == JFileChooser.APPROVE_OPTION) {	
+			
+			myFirstFileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			int v = myFirstFileChooser.getCurrentDirectory().toString().indexOf("src");
+			String name = myFirstFileChooser.toString().substring(0, v+3);
+			myFirstFileChooser = new JFileChooser(name);
+			File direct = myFirstFileChooser.getCurrentDirectory();
+			File[] file = direct.listFiles();
+			if (file != null) {
+				for (File f : file) {
+					String[] Files = f.list();
+					for (String j : Files) {
+						if (j.endsWith(".java")) {
+							try {
+								FileWriter fw = new FileWriter("src/" + f.getName() + "/" + j, true);
+								fw.write("\n//Copyright © 2023 Devin Danger Moorjani");
+								fw.close();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+
+				}
 			}
 		}
 
 	}
 }
-
+//Copyright © 2023 Devin Danger Moorjani

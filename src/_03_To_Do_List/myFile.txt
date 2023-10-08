@@ -1,9 +1,0 @@
-awaken
-eat
-nap
-game
-dinner
-Play a few games of futbol and immerse yourself in the vibrant lifestyle in the fantastic city of Barcelona, Spain.		} 
-go home
-sleep
-repeat
